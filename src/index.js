@@ -5,11 +5,19 @@ import Searchbar from './components/search_bar';
 
 const API_KEY = process.env.API_YOUTUBE;
 
-YTSearch({key: API_KEY, term: 'surfboard'}, function(data) {
-  console.log(data);
-});
-
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { videos: [] };
+
+    YTSearch({key: API_KEY, term: 'surfboard'}, (videos) => {
+      this.setState({ videos });
+      // same as this.setState({ videos: videos });
+      // only if key and prop are same var name
+    });
+  }
+
   render() {
     return (
       <div>
